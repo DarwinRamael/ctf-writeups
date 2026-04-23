@@ -1,205 +1,334 @@
-# 🛡️ Anthem – Windows Exploitation Writeup
+# 🛡️ Anthem – Windows Exploitation Writeup (Enhanced Version)
 
-Este repositório documenta a exploração da máquina **Anthem**, proposta pela plataforma TryHackMe. O objetivo deste material é demonstrar, de forma clara e profissional, o processo completo de comprometimento de um ambiente Windows, evidenciando habilidades práticas relevantes para segurança ofensiva.
+Este repositório apresenta uma análise completa da máquina **Anthem** (TryHackMe), com uma abordagem estruturada e orientada a raciocínio técnico.
+O objetivo é demonstrar não apenas **o que foi feito**, mas **por que cada decisão foi tomada**, evidenciando pensamento crítico — algo valorizado por recrutadores técnicos.
 
 ---
 
 ## 🎯 Objetivos Técnicos Demonstrados
 
-* Enumeração de serviços e aplicações
-* Análise de aplicações web
-* Uso de OSINT (Open Source Intelligence)
+* Enumeração ativa e passiva
+* Web reconnaissance (manual + automatizado)
+* Uso de ferramentas (Nmap, Gobuster, Feroxbuster)
+* OSINT aplicado à exploração
 * Exploração de credenciais
 * Acesso remoto via RDP
-* Escalação de privilégios em ambiente Windows
-* Manipulação de permissões de arquivos
+* Enumeração local em Windows
+* Escalação de privilégios via permissões
 
 ---
 
-## 🔍 Fase 1 – Enumeração
+## 🔍 Fase 1 – Enumeração Inicial
 
-A enumeração foi conduzida utilizando **Nmap** para identificar serviços ativos e possíveis vetores de ataque.
+### 🔧 Nmap Scan
 
-```bash
-nmap -A <IP>
+```bash id="nmapscan01"
+nmap -A -p- <IP>
 ```
 
-### 🔎 Resultados relevantes:
+### 🔎 Portas relevantes identificadas:
 
-| Porta   | Serviço     | Observação               |
-| ------- | ----------- | ------------------------ |
-| 80      | HTTP        | Aplicação web ativa      |
-| 3389    | RDP         | Possível acesso remoto   |
-| 445     | SMB         | Compartilhamento Windows |
-| 135/139 | RPC/NetBIOS | Comunicação interna      |
+| Porta | Serviço | Interpretação               |
+| ----- | ------- | --------------------------- |
+| 80    | HTTP    | Superfície web exposta      |
+| 3389  | RDP     | Vetor de acesso remoto      |
+| 445   | SMB     | Potencial enumeração futura |
+
+➡️ **Insight:** Mesmo com poucos serviços, já temos dois vetores fortes: Web + RDP.
 
 ---
 
-## 🌐 Fase 2 – Análise Web
+### 🔎 Enumeração de diretórios
 
-### 📁 robots.txt
-
-A análise do arquivo revelou diretórios sensíveis e uma possível string utilizada como senha.
-
+```bash id="dirscan01"
+gobuster dir -u http://<IP>/ -w /usr/share/wordlists/dirbuster/directory-list-2.3-medium.txt
 ```
+
+Alternativa utilizada:
+
+```bash id="ferox01"
+feroxbuster -u http://<IP>/
+```
+
+➡️ **Objetivo:** Encontrar endpoints ocultos (ex: admin panels, CMS, backups)
+
+---
+
+## 🌐 Fase 2 – Reconhecimento Web
+
+### 📄 Análise do conteúdo
+
+O site apresenta:
+
+* Blogs
+* Categorias
+* Tags
+* Conteúdo aparentemente legítimo
+
+➡️ **Insight:** Ambientes com conteúdo “realista” frequentemente escondem pistas (CTF design).
+
+---
+
+### 🤖 robots.txt
+
+```id="robots01"
+http://<IP>/robots.txt
+```
+
+Revela:
+
+```id="robots02"
 Disallow: /bin/
 Disallow: /config/
 Disallow: /umbraco/
 Disallow: /umbraco_client/
 ```
 
-➡️ **Insight:** Informações em `robots.txt` frequentemente expõem caminhos sensíveis.
+➡️ **Conclusões:**
+
+* Diretórios sensíveis expostos
+* Indicação direta do CMS
 
 ---
 
 ### 🧩 Identificação do CMS
 
-O diretório `/umbraco` revelou que a aplicação utiliza o CMS **Umbraco**.
+➡️ CMS identificado: **Umbraco**
 
----
+Painel encontrado:
 
-### 🕵️ OSINT e Enumeração de Usuários
-
-Através da análise de conteúdo:
-
-* Email identificado: `JD@anthem.com`
-* Nome encontrado: John Doe (não administrador)
-
-Um artigo contendo um poema levou à identificação do administrador via OSINT.
-
-➡️ **Técnica aplicada:** correlação de conteúdo + pesquisa externa
-
----
-
-### 📧 Padrão de Email
-
-Com base no padrão identificado:
-
+```id="umbraco01"
+http://<IP>/umbraco/#/login
 ```
+
+[INSERIR IMAGEM: tela de login do Umbraco]
+
+---
+
+## 🕵️ Fase 3 – OSINT e Enumeração de Identidade
+
+### 📧 Informações encontradas
+
+* Email: `jd@anthem.com`
+* Domínio: `anthem.com`
+
+➡️ **Padrão identificado:**
+
+```id="pattern01"
 <iniciais>@anthem.com
 ```
 
-Foi possível inferir o email do administrador.
+---
+
+### 🧠 Descoberta do Administrador
+
+Um poema encontrado no site contém a palavra “admin”.
+
+[INSERIR IMAGEM: poema encontrado]
+
+➡️ Estratégia:
+
+1. Copiar o poema
+2. Pesquisar no Google
+
+➡️ Resultado:
+
+* Referência a **Solomon Grundy**
 
 ---
 
-## 🚩 Fase 3 – Captura de Flags
+### 🔐 Credenciais derivadas
 
-As flags foram encontradas através de:
+* Nome: Solomon Grundy
+* Iniciais: SG
 
-* Inspeção de código-fonte
-* Perfis de usuários
-* Conteúdo oculto em páginas
+➡️ Email inferido:
 
-### 📸 Evidências
-
-[INSERIR IMAGEM: código-fonte com flags]
-
-[INSERIR IMAGEM: perfil de usuário com flag]
-
-[INSERIR IMAGEM: código-fonte adicional]
-
----
-
-## 💻 Fase 4 – Acesso Inicial
-
-### 🔐 Acesso via RDP
-
-Com credenciais obtidas:
-
-```bash
-xfreerdp /f /u:USUARIO /p:SENHA /v:<IP>
+```id="email01"
+sg@anthem.com
 ```
 
-Caso necessário:
+➡️ Credenciais completas:
 
-* `/cert-ignore`
-* `-sec-nla`
-
-➡️ **Decisão técnica:** uso de RDP devido ausência de SSH
+```id="creds01"
+Usuário: sg@anthem.com
+Senha: UmbracoIsTheBest!
+```
 
 ---
 
-## 📂 Fase 5 – Enumeração Local
+## 🚩 Fase 4 – Captura de Flags
 
-Após acesso:
+### 📍 Localizações
 
-* Identificação de arquivos sensíveis
-* Busca por credenciais armazenadas
+* `/authors` → Flag 1
+* Homepage (source code) → Flag 2
+* Blog posts → Flags 3 e 4
 
-### 🔎 Diretório relevante:
+[INSERIR IMAGEM: flags no código fonte]
 
+[INSERIR IMAGEM: flags em páginas de blog]
+
+➡️ **Insight:** Sempre verificar:
+
+* Código-fonte
+* Perfis
+* Conteúdo dinâmico
+
+---
+
+## 🧪 Fase 5 – Exploração do CMS
+
+Login realizado em:
+
+```id="umbraco02"
+/umbraco/#/login
 ```
+
+➡️ Resultado:
+
+* Acesso válido
+* Nenhuma funcionalidade explorável relevante
+
+➡️ **Decisão técnica:** Pivotar para outro vetor (RDP)
+
+---
+
+## 💻 Fase 6 – Acesso Inicial via RDP
+
+```bash id="rdp01"
+xfreerdp /f /u:SG /p:UmbracoIsTheBest! /v:<IP>
+```
+
+Alternativa:
+
+```bash id="rdp02"
+rdesktop <IP>
+```
+
+➡️ **Insight:** Quando Web não gera shell → testar serviços expostos
+
+---
+
+## 📂 Fase 7 – Enumeração Local (Windows)
+
+### 🔎 Passos realizados
+
+1. Abrir File Explorer
+2. Navegar até `C:\`
+3. Ativar **Hidden Files**
+
+[INSERIR IMAGEM: ativando arquivos ocultos]
+
+---
+
+### 📁 Diretório encontrado
+
+```id="backup01"
 C:\backup
 ```
 
-[INSERIR IMAGEM: pasta backup oculta]
+[INSERIR IMAGEM: pasta backup]
 
-Arquivo encontrado:
+Arquivo:
 
-```
+```id="restore01"
 restore
 ```
 
 ---
 
-## 🔓 Fase 6 – Escalação de Privilégios
+## 🔓 Fase 8 – Escalação de Privilégios
 
-O arquivo `restore` possuía restrições de acesso.
+### 🚫 Problema
 
-### 🛠️ Técnica utilizada:
-
-Alteração de permissões via GUI:
-
-1. Propriedades do arquivo
-2. Aba "Segurança"
-3. Adicionar usuário atual
-4. Conceder acesso
-
-[INSERIR IMAGEM: alteração de permissões]
-
-➡️ **Resultado:** acesso à senha do administrador
+Arquivo sem permissão de acesso
 
 ---
 
-## 👑 Fase 7 – Acesso Administrativo
+### 🛠️ Solução
 
-Com a senha:
+Modificar permissões:
 
+1. Botão direito → Properties
+2. Aba Security
+3. Edit → Add
+4. Adicionar usuário **SG**
+5. Aplicar permissões
+
+[INSERIR IMAGEM: alteração de permissões]
+
+---
+
+### 🔑 Credencial obtida
+
+```id="admincred01"
+Usuário: Administrator
+Senha: ChangeMeBaby1MoreTime
 ```
+
+---
+
+## 👑 Fase 9 – Acesso Root
+
+```id="rootpath01"
 C:\Users\Administrator\Desktop
 ```
 
-Arquivo final:
+Arquivo:
 
-```
+```id="rootflag01"
 root.txt
 ```
+
+➡️ Flag final capturada com sucesso.
 
 ---
 
 ## 🧠 Lições Aprendidas
 
-* Enumeração é a base de qualquer exploração bem-sucedida
-* Pequenos vazamentos (como `robots.txt`) podem ser críticos
-* OSINT pode revelar informações que não estão diretamente no alvo
-* Ambientes Windows frequentemente possuem falhas de permissões exploráveis
-* RDP é um vetor importante quando SSH não está disponível
+* Enumeração é o passo mais crítico em qualquer ataque
+* **robots.txt** pode revelar informações sensíveis
+* OSINT pode ser decisivo (ex: identificação de usuários)
+* Padrões de email são exploráveis
+* Nem todo acesso válido (CMS) leva à exploração direta
+* RDP é um vetor essencial em ambientes Windows
+* Permissões mal configuradas são vulnerabilidades comuns
+
+---
+
+## 📊 Diferenciais Técnicos Demonstrados
+
+Este projeto evidencia:
+
+* Capacidade de correlação de informações (OSINT + Web)
+* Tomada de decisão baseada em contexto
+* Adaptação de estratégia (pivoting)
+* Conhecimento prático de ambiente Windows
+* Metodologia estruturada de exploração
 
 ---
 
 ## 📌 Considerações Finais
 
-Este projeto demonstra uma abordagem estruturada e prática para exploração de ambientes Windows, destacando competências essenciais para atuação em:
+Este writeup foi estruturado com foco em:
+
+✔ Clareza técnica
+✔ Organização lógica
+✔ Raciocínio documentado
+✔ Reprodutibilidade
+
+Ideal para demonstrar habilidades em:
 
 * Pentest
 * Red Team
-* Cybersecurity Analyst
+* Cybersecurity Analysis
 
 ---
 
 ## 📎 Observação
 
-As imagens foram omitidas propositalmente e devem ser adicionadas posteriormente nos pontos indicados para complementar a documentação visual.
+As imagens devem ser adicionadas nos pontos indicados para enriquecer a evidência visual do processo.
 
----
+
+Só me dizer 👍
