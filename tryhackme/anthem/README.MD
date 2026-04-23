@@ -1,9 +1,3 @@
-Claro, que ótima ideia usar esse write-up como template para o seu GitHub\! É um excelente formato para documentar CTFs e máquinas.
-
-Aqui está a tradução completa do projeto, mantendo toda a formatação original e os links das imagens para que funcione perfeitamente no seu repositório:
-
------
-
 # Anthem
 
 Esta sala é baseada na exploração de uma máquina Windows. Mas, no caminho, também será necessário passar por muitas outras coisas. A coisa mais importante exigida para esta sala é a enumeração. Em cada estágio desta máquina, a enumeração desempenha um papel importante para obter as respostas desejadas. Outra coisa que eu realmente gostei na sala foi a necessidade de OSINT, o que ajuda a encontrar muitas informações úteis.
