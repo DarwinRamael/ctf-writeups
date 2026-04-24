@@ -75,9 +75,9 @@ Durante a navegação no site, foram identificados:
 * Categorias e tags
 * Conteúdo aparentemente legítimo
 
-[INSERIR IMAGEM: página inicial do site]
-
-[INSERIR IMAGEM: navegação em blog]
+<p align="center">
+  <img src="images/blog.jpeg" width="700">
+</p>
 
 ➡️ **Insight:** Ambientes CTF frequentemente simulam aplicações reais para esconder pistas em conteúdo aparentemente comum.
 
@@ -156,7 +156,9 @@ http://<IP>/umbraco/#/login
 * Email encontrado: `jd@anthem.com`
 * Domínio: `anthem.com`
 
-[INSERIR IMAGEM: email encontrado no site]
+<p align="center">
+  <img src="images/email.jpeg" width="700">
+</p>
 
 ---
 
@@ -174,7 +176,9 @@ http://<IP>/umbraco/#/login
 
 Um poema encontrado no site chamou atenção.
 
-[INSERIR IMAGEM: poema encontrado]
+<p align="center">
+  <img src="images/poem.jpeg" width="700">
+</p>
 
 ➡️ **Raciocínio aplicado:**
 
@@ -184,13 +188,15 @@ O conteúdo parecia não ser original → possível referência externa.
 
 * Trecho do poema foi pesquisado no Google
 
-[INSERIR IMAGEM: busca no Google]
+
 
 ➡️ Resultado:
 
 Referência a **Solomon Grundy**
 
-[INSERIR IMAGEM: resultado da busca]
+<p align="center">
+  <img src="images/search.jpeg" width="700">
+</p>
 
 ➡️ **Insight:** OSINT vai além de emails — envolve correlação de qualquer informação pública.
 
