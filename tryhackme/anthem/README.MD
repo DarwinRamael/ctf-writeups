@@ -78,27 +78,6 @@ Durante a navegação no site, foram identificados:
 
 ➡️ **Insight:** Ambientes CTF frequentemente simulam aplicações reais para esconder pistas em conteúdo aparentemente comum.
 
----
-
-## 🔍 Análise do código-fonte
-
-A inspeção manual (View Page Source) revelou:
-
-* Comentários HTML ocultos
-* Possíveis pistas deixadas por desenvolvedores
-* Indícios da estrutura do sistema
-
-<p align="center">
-  <img src="images/page1.jpeg" width="700">
-</p>
-<p align="center">
-  <img src="images/page2.jpeg" width="700">
-</p>
-<p align="center">
-  <img src="images/page3.jpeg" width="700">
-</p>
-
-➡️ **Insight:** Comentários no código são uma fonte comum de vazamento de informações sensíveis.
 
 ---
 
@@ -242,13 +221,21 @@ Senha: UmbracoIsTheBest!
 ## 📌 Localizações
 
 * `/authors` → Flag 1
-  [INSERIR IMAGEM: flag authors]
+  <p align="center">
+  <img src="images/page1.jpeg" width="700">
+</p>
+
 
 * Homepage (source code) → Flag 2
-  [INSERIR IMAGEM: flag no código fonte]
+  <p align="center">
+  <img src="images/page2.jpeg" width="700">
+</p>
+
 
 * Blog posts → Flags 3 e 4
-  [INSERIR IMAGEM: flags no blog]
+  <p align="center">
+  <img src="images/page3.jpeg" width="700">
+</p>
 
 ➡️ **Insight:** Flags raramente estão visíveis — exigem exploração ativa e atenção a detalhes.
 
