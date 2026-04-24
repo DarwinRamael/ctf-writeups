@@ -248,7 +248,9 @@ Login realizado em:
 /umbraco/#/login
 ```
 
-[INSERIR IMAGEM: login realizado]
+ <p align="center">
+  <img src="images/login.jpeg" width="700">
+</p>
 
 ---
 
