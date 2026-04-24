@@ -88,9 +88,15 @@ A inspeção manual (View Page Source) revelou:
 * Possíveis pistas deixadas por desenvolvedores
 * Indícios da estrutura do sistema
 
-[INSERIR IMAGEM: código fonte com comentários]
-
-[INSERIR IMAGEM: devtools aberto]
+<p align="center">
+  <img src="images/page1.jpeg" width="700">
+</p>
+<p align="center">
+  <img src="images/page2.jpeg" width="700">
+</p>
+<p align="center">
+  <img src="images/page3.jpeg" width="700">
+</p>
 
 ➡️ **Insight:** Comentários no código são uma fonte comum de vazamento de informações sensíveis.
 
