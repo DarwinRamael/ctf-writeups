@@ -1,4 +1,4 @@
-# 🛡️ Anthem – Windows Exploitation Writeup (Enhanced Version)
+# 🛡️ Anthem – Windows Exploitation Writeup
 
 Este repositório apresenta uma análise completa da máquina **Anthem** (TryHackMe), com uma abordagem estruturada e orientada a raciocínio técnico.
 O objetivo é demonstrar não apenas **o que foi feito**, mas **por que cada decisão foi tomada**, evidenciando pensamento crítico — algo valorizado por recrutadores técnicos.
