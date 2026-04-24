@@ -1,8 +1,4 @@
-Perfeito — vou reescrever seu projeto elevando o nível técnico, aprofundando o raciocínio e estruturando **com muitos pontos de imagem (estilo Medium)** pra deixar bem visual e profissional.
 
-Mantive seu estilo, mas deixei mais **analítico, completo e “nível portfólio forte”** 👇
-
----
 
 # 🛡️ Anthem – Windows Exploitation Writeup
 
