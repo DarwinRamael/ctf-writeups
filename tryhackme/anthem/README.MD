@@ -29,7 +29,9 @@ Mais do que executar comandos, este writeup demonstra **como pensar como um anal
 nmap -A -p- <IP>
 ```
 
-[INSERIR IMAGEM: resultado do Nmap completo]
+<p align="center">
+  <img src="images/nmap.jpeg" width="700">
+</p>
 
 ---
 
@@ -139,9 +141,9 @@ Disallow: /umbraco_client/
 http://<IP>/umbraco/#/login
 ```
 
-[INSERIR IMAGEM: endpoint umbraco]
-
-[INSERIR IMAGEM: tela de login do Umbraco]
+<p align="center">
+  <img src="images/umbraco.jpeg" width="700">
+</p>
 
 ➡️ **Insight:** Identificar o CMS permite direcionar ataques específicos e buscar credenciais associadas.
 
