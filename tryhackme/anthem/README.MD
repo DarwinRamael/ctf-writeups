@@ -55,13 +55,10 @@ nmap -A -p- <IP>
 gobuster dir -u http://<IP>/ -w /usr/share/wordlists/dirbuster/directory-list-2.3-medium.txt
 ```
 
-```bash
-feroxbuster -u http://<IP>/
-```
 
-[INSERIR IMAGEM: resultado do gobuster]
-
-[INSERIR IMAGEM: resultado do feroxbuster]
+<p align="center">
+  <img src="images/gobuster.jpeg" width="700">
+</p>
 
 ➡️ **Objetivo:** Descobrir endpoints ocultos e superfícies adicionais de ataque.
 
