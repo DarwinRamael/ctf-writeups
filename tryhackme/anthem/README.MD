@@ -220,19 +220,18 @@ Senha: UmbracoIsTheBest!
 
 ## 📌 Localizações
 
-* `/authors` → Flag 1
+* Homepage (source code) → Flag 2
   <p align="center">
   <img src="images/page1.jpeg" width="700">
 </p>
 
 
-* Homepage (source code) → Flag 2
+* Blog posts → Flags 3 e 4
   <p align="center">
   <img src="images/page2.jpeg" width="700">
 </p>
 
 
-* Blog posts → Flags 3 e 4
   <p align="center">
   <img src="images/page3.jpeg" width="700">
 </p>
