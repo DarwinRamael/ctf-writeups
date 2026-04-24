@@ -103,7 +103,9 @@ A inspeção manual (View Page Source) revelou:
 http://<IP>/robots.txt
 ```
 
-[INSERIR IMAGEM: acesso ao robots.txt]
+<p align="center">
+  <img src="images/robots.jpeg" width="700">
+</p>
 
 Conteúdo encontrado:
 
@@ -114,9 +116,7 @@ Disallow: /umbraco/
 Disallow: /umbraco_client/
 ```
 
-<p align="center">
-  <img src="images/robots.jpeg" width="700">
-</p>
+
 
 ➡️ **Conclusões:**
 
