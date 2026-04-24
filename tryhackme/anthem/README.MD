@@ -114,7 +114,9 @@ Disallow: /umbraco/
 Disallow: /umbraco_client/
 ```
 
-[INSERIR IMAGEM: conteúdo do robots.txt]
+<p align="center">
+  <img src="images/robots.jpeg" width="700">
+</p>
 
 ➡️ **Conclusões:**
 
