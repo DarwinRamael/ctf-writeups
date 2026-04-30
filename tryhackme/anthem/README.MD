@@ -19,6 +19,10 @@ Mais do que executar comandos, este writeup demonstra **como pensar como um anal
 * Enumeração local em Windows (GUI + CLI)
 * Escalação de privilégios via permissões (ACL)
 
+<p align="center">
+  <img src="images/anthem_diagram.jpeg" width="700">
+</p>
+
 ---
 
 # 🔍 Fase 1 – Enumeração Inicial
